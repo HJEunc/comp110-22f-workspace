@@ -30,7 +30,9 @@ if letter == word[4]:
     print(letter + " found at index 4")
     counter = counter + 1
 
-if counter>0:
+if counter > 1:
     print(str(counter) + " instances of " + letter + " found in " + word)
+elif counter == 1:
+    print(str(counter) + " instance of " + letter + " found in " + word)
 else:
     print("No instances of " + letter + " found in " + word)
