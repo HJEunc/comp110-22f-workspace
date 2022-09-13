@@ -1,13 +1,14 @@
 """EX03 - Structured Wordle."""
-
 __author__ = "730566282"
+
 
 WHITE_BOX: str = "\U00002B1C"
 GREEN_BOX: str = "\U0001F7E9"
 YELLOW_BOX: str = "\U0001F7E8"
 
+
 def contains_char(searched_str: str, char_str: str) -> bool:
-    """Search for a given character in a given string"""
+    """Search for a given character in a given string."""
     assert len(char_str) == 1
     i: int = 0
     while i < len(searched_str):
@@ -17,9 +18,9 @@ def contains_char(searched_str: str, char_str: str) -> bool:
             i += 1
     return False
 
+
 def emojified(guess: str, secret: str) -> str:
-    """Given 2 equal length strings, return emojis corresponding to guess"""
-    
+    """Given 2 equal length strings, return emojis corresponding to guess."""
     assert len(guess) == len(secret)
     j: int = 0
     emoji_result: str = ""
@@ -35,28 +36,32 @@ def emojified(guess: str, secret: str) -> str:
         j += 1
     return emoji_result
 
+
 def input_guess(expected_length: int) -> str:
-    """Given a length, promps user for guess until one is given of correct length"""
+    """Given a length, promps user for guess until one is given of correct length."""
     guess: str = input(f"Enter a {str(expected_length)} character word: ")
     while len(guess) != expected_length:
         guess = input(f"That wasn't {str(expected_length)} chars! Try again: ")
     return guess
 
+
 def main() -> None:
     """The entrypoint of the program and main game loop."""
     secret: str = "codes"
     turn: int = 1
-    guess: str = ""
-    while turn <= len(secret) and guess != secret:  # while turns are left and user has not won
-        print(f"=== Turn {turn}/{len(secret)} ===")
-        guess = input_guess(len(secret))
+    won: bool = False
+    while turn <= 6 and not won:  # while turns are left and user has not won
+        print(f"=== Turn {turn}/6 ===")
+        guess: str = input_guess(len(secret))
         print(emojified(guess, secret))
         if guess == secret:  # user won
-            print(f"You won in {turn}/{len(secret)} turns!")
+            won = True
+            print(f"You won in {turn}/6 turns!")
         else:
             turn += 1
     if turn > len(secret):  # if user runs out of turns
-        print(f"X/{len(secret)} - Sorry, try again tomorrow!")
+        print("X/6 - Sorry, try again tomorrow!")
+
 
 if __name__ == "__main__":  # allows to run as module and import functions and reuse them
     main()
