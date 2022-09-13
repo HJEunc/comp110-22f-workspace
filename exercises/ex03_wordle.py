@@ -39,12 +39,12 @@ def input_guess(expected_length: int) -> str:
     """Given a length, promps user for guess until one is given of correct length"""
     guess: str = input(f"Enter a {str(expected_length)} character word: ")
     while len(guess) != expected_length:
-        guess: str = input(f"That wasn't {str(expected_length)} chars! Try again: ")
+        guess = input(f"That wasn't {str(expected_length)} chars! Try again: ")
     return guess
 
 def main() -> None:
     """The entrypoint of the program and main game loop."""
-    secret: int = "codes"
+    secret: str = "codes"
     turn: int = 1
     guess: str = ""
     while turn <= len(secret) and guess != secret:  # while turns are left and user has not won
