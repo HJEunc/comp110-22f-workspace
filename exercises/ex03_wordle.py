@@ -23,7 +23,6 @@ def emojified(guess: str, secret: str) -> str:
     assert len(guess) == len(secret)
     j: int = 0
     emoji_result: str = ""
-    checker: bool = False
     while j < len(secret):
         checker: bool = contains_char(secret, guess[j])
         if checker:  # if character is in word, checks to see if it is green or yellow
