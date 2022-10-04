@@ -42,3 +42,7 @@ print(schools)
 #Alternatively, initialize key-value pairs
 schools = {"UNC": 19_400, "Duke": 6_717, "NCSU": 26_150}
 print(schools)
+
+# Example looping over the keys of a dict
+for school in schools:
+    print(f"Key: {school} -> Value: {schools[school]}")
