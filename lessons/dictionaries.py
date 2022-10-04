@@ -22,5 +22,23 @@ print(f"UNC has {schools['UNC']} students")
 schools.pop("Duke")
 
 # Test for existance of a key
-is_duke_present: bool = "Duke" in schools
-print(f"Duke is present: {is_duke_present}")
+if "Duke" in schools:
+    print("Found the key 'Duke' in schools")
+else:
+    print("No key 'Duke' in schools")
+
+# Update / Reassign a key-value pair
+schools["UNC"] = 20_000
+schools["NCSU"] += 200
+
+print(schools)
+
+# Demonstration of dictionary literals
+
+# Empty dictionary literal
+schools = {}  # Same as dict()
+print(schools)
+
+#Alternatively, initialize key-value pairs
+schools = {"UNC": 19_400, "Duke": 6_717, "NCSU": 26_150}
+print(schools)
