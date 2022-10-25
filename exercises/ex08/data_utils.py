@@ -16,7 +16,7 @@ def read_csv_rows(filename: str) -> list[dict[str, str]]:
     # Prepare to read the data file as a CSV rather than just strings
     csv_reader = DictReader(file_handle)
 
-    #Read each row of the CSV lin-by-line
+    # Read each row of the CSV lin-by-line
     for row in csv_reader:
         result.append(row)
 
@@ -45,21 +45,39 @@ def columnar(row_table: list[dict[str, str]]) -> dict[str, list[str]]:
     return result
 
 
-def head(table: dict[str, list[str]], rowcount: int) -> dict[str, list[str]]:
+def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
     """Produce a new column-based table with only the first "n" rows of data for each column."""
     result: dict[str, list[str]] = {}
     for column in table:
-        if rowcount >= len(table[column]):
+        if n >= len(table[column]):
             return table
     for column in table:
         resultlist: list[str] = []
         i: int = 0
-        while i < rowcount:
+        while i < n:
             resultlist.append(table[column][i])
             i = i + 1
         result[column] = resultlist
     return result
 
 
-def select()
+def select(table: dict[str, list[str]], columns: list[str]) -> dict[str, list[str]]:
     """Produce a new column-based table with only a speciic subset of original columns."""
+    result: dict[str, list[str]] = {}
+    for column in columns:
+        if column in table:
+            result[column] = table[column]
+    return result
+
+
+def concat(table1: dict[str, list[str]], table2: dict[str, list[str]]) -> dict[str, list[str]]:
+    """Produce a new column-based table with two column-based tables combined."""
+    result: dict[str, list[str]] = {}
+    for column in table1:
+        result[column] = table1[column]
+    for column in table2:
+        if column in result:
+            result[column] += table2[column]
+        else:
+            result[column] = table2[column]
+    return result
