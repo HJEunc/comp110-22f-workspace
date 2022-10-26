@@ -53,10 +53,8 @@ def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
             return table
     for column in table:
         resultlist: list[str] = []
-        i: int = 0
-        while i < n:
+        for i in range(n):
             resultlist.append(table[column][i])
-            i = i + 1
         result[column] = resultlist
     return result
 
