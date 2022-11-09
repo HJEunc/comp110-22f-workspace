@@ -106,8 +106,10 @@ class Model:
         """Initialize the cells with random locations and directions."""
         if (numinfected + numimmune) == cells or (numinfected + numimmune) <= 0:
             raise ValueError("Too many infected and immune")
-        if numinfected == cells or numinfected <= 0:
-            raise ValueError("Correct number of infected")
+        if numinfected >= cells or numinfected <= 0:
+            raise ValueError("Fix number of infected")
+        if numimmune >= cells:
+            raise ValueError("Fix number of immune")
         self.population = []
         for i in range(cells):
             start_location: Point = self.random_location()
@@ -158,9 +160,9 @@ class Model:
     def is_complete(self) -> bool:
         """Method to indicate when the simulation is complete."""
         recovered: list[bool] = []
-        for cells in self.population:
-            if cells.immunize() or cells.is_vulnerable():
-                recovered.append(cells.immunize() or cells.is_vulnerable())
+        for cell in self.population:
+            if cell.immunize() or cell.is_vulnerable():
+                recovered.append(cell)
         if len(recovered) < constants.CELL_COUNT:
             return False
         else:
@@ -168,8 +170,7 @@ class Model:
 
     def check_contacts(self) -> None:
         """Checks if cells are touching."""
-        i: int = 0
-        for i in range(len(self.population)):
-            for j in range(len(self.population)):
+        for i in range(constants.CELL_COUNT):
+            for j in range(constants.CELL_COUNT):
                 if self.population[i].location.distance(self.population[j].location) < constants.CELL_RADIUS:
                     self.population[i].contact_with(self.population[j])
