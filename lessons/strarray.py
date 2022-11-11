@@ -19,6 +19,7 @@ class StrArray:
             for item in self.items:
                 result.items.append(item + rhs)
         if isinstance(rhs, StrArray):
+            assert len(self.items) == len(rhs.items)
             for i in range(len(self.items)):
                 result.items.append(self.items[i] + rhs.items[i])
         return result
